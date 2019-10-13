@@ -47,10 +47,14 @@ int main()
         double y = ydata;
         double z = zdata;       /*x,y,z values are stored in clearly labelled variables so they can be clearly & easily used by the
                                     following formula for greater readability.*/
-
+									
+		/*Formulas applied to x,y,z data to compute the tilt in pitch and roll
+         direction. The value is then stored in the appropriate array location.
+		 
+		 ToDo: Move this calculation into Matalb script. Have mbed move raw data only.
+		 */
         tilt_pitch[i]= - atan2(-y,z) * (180.0 / PI);
-        tilt_roll[i]=atan2(x, sqrt(y*y + z*z)) * (180.0 / PI);/*Formulas applied to x,y,z data to compute the tilt in pitch and roll
-                                                              direction. The value is then stored in the appropriate array location.*/
+        tilt_roll[i]=atan2(x, sqrt(y*y + z*z)) * (180.0 / PI);
         wait(T);                // wait until next reading should be taken
         i=i++;
         i%2 == 0 ? led1=1 : led1=0;// led on when index is even, off when odd. LED flashes with frequency proportional to sample rate
